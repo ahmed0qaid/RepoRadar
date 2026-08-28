@@ -13,11 +13,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: reporadar-data-collector
+  cancel-in-progress: false
+
 jobs:
   collect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -41,5 +47,10 @@ jobs:
           git config user.name "reporadar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data docs/data
-          git diff --cached --quiet || git commit -m "data: refresh RepoRadar signals"
-          git push
+          if git diff --cached --quiet; then
+            echo "No data changes"
+            exit 0
+          fi
+          git commit -m "data: refresh RepoRadar signals"
+          git pull --rebase origin main
+          git push origin main

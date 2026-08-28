@@ -3,33 +3,79 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="RepoRadar AI finds rising GitHub repositories and early contribution opportunities." />
-  <title>RepoRadar AI — Find the next rising repository</title>
+  <meta name="description" content="RepoRadar finds rising GitHub repositories early and matches developers with contribution opportunities." />
+  <title>RepoRadar — Open-source trend intelligence</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <header class="hero">
-    <nav><div class="brand"><span class="radar">◉</span> RepoRadar <b>AI</b></div><a href="https://github.com" target="_blank">GitHub ↗</a></nav>
+    <nav>
+      <div class="brand"><span class="radar">◉</span> RepoRadar <b>AI</b></div>
+      <div class="nav-links"><a href="#contribute">Issue Matcher</a><a href="https://github.com/ahmed2qaid/RepoRadar" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </nav>
     <div class="hero-copy">
-      <span class="eyebrow">OPEN-SOURCE INTELLIGENCE</span>
-      <h1>Find the next rising<br><span>GitHub repository</span> early.</h1>
-      <p>Track momentum, discover hidden gems, and identify contribution opportunities before everyone else arrives.</p>
-      <div class="stats"><div><strong id="repoCount">0</strong><span>repos tracked</span></div><div><strong id="updated">—</strong><span>last refresh</span></div><div><strong>$0</strong><span>infrastructure goal</span></div></div>
+      <span class="eyebrow">OPEN-SOURCE INTELLIGENCE · v0.3</span>
+      <h1>Spot momentum.<br><span>Contribute before the crowd.</span></h1>
+      <p>RepoRadar measures real growth windows, acceleration and contributor opportunity, then matches your skills with open GitHub issues.</p>
+      <div class="stats">
+        <div><strong id="repoCount">0</strong><span>repos tracked</span></div>
+        <div><strong id="risingCount">0</strong><span>rising fast</span></div>
+        <div><strong id="gemCount">0</strong><span>hidden gems</span></div>
+        <div><strong id="updated">—</strong><span>last refresh</span></div>
+      </div>
     </div>
   </header>
 
   <main>
+    <section class="signal-tabs" aria-label="Repository signal">
+      <button class="tab active" data-category="">All signals</button>
+      <button class="tab" data-category="trending_now">🔥 Trending now</button>
+      <button class="tab" data-category="rising_fast">🚀 Rising fast</button>
+      <button class="tab" data-category="hidden_gem">💎 Hidden gems</button>
+      <button class="tab" data-category="best_to_contribute">🎯 Best to contribute</button>
+    </section>
+
     <section class="controls">
       <input id="search" placeholder="Search repositories, languages, topics…" />
       <select id="language"><option value="">All languages</option></select>
-      <select id="sort"><option value="rising_score">Rising score</option><option value="opportunity_score">Opportunity</option><option value="stars">Stars</option><option value="star_delta">Recent growth</option></select>
+      <select id="sort">
+        <option value="viral_score">Viral score</option>
+        <option value="opportunity_score">Opportunity</option>
+        <option value="growth_24h">24h growth</option>
+        <option value="growth_7d">7d growth</option>
+        <option value="star_velocity">Velocity</option>
+        <option value="star_acceleration">Acceleration</option>
+        <option value="stars">Stars</option>
+      </select>
     </section>
-    <section class="section-head"><div><span class="eyebrow">LIVE SIGNALS</span><h2>Rising repositories</h2></div><p>Scores update automatically from GitHub data.</p></section>
+
+    <section class="section-head">
+      <div><span class="eyebrow">LIVE SIGNALS</span><h2 id="sectionTitle">Repository radar</h2></div>
+      <p>Growth metrics mature automatically as snapshots accumulate.</p>
+    </section>
     <section id="grid" class="grid"></section>
-    <section id="empty" class="empty" hidden>No repositories yet. Run the collector workflow once.</section>
+    <section id="empty" class="empty" hidden>No repositories match this signal yet.</section>
+
+    <section id="contribute" class="matcher-section">
+      <div class="matcher-copy">
+        <span class="eyebrow">v0.3 · CONTRIBUTION MATCHER</span>
+        <h2>Tell RepoRadar what you know.</h2>
+        <p>Enter skills such as Python, Flutter, TypeScript, backend, AI, Docker or documentation. Matching happens locally in your browser — no paid AI API and no account required.</p>
+      </div>
+      <div class="matcher-panel">
+        <label for="skills">Your skills</label>
+        <div class="skill-entry"><input id="skills" placeholder="Python, backend, AI, Docker" /><button id="matchBtn">Find issues</button></div>
+        <div class="preset-skills">
+          <button data-skill="Python">Python</button><button data-skill="TypeScript">TypeScript</button><button data-skill="Flutter">Flutter</button><button data-skill="Backend">Backend</button><button data-skill="AI">AI</button><button data-skill="Documentation">Docs</button>
+        </div>
+        <p class="privacy-note">Skills stay in this browser. RepoRadar only reads the public issue dataset generated by GitHub Actions.</p>
+      </div>
+      <div id="matchSummary" class="match-summary" hidden></div>
+      <section id="issueGrid" class="issue-grid"></section>
+    </section>
   </main>
 
-  <footer>RepoRadar AI · Open source · Built to stay free</footer>
+  <footer>RepoRadar · Open source · Zero-paid-infrastructure MVP</footer>
   <script src="assets/app.js"></script>
 </body>
 </html>

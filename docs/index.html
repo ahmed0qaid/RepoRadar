@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RepoRadar AI finds rising GitHub repositories and early contribution opportunities." />
+  <title>RepoRadar AI — Find the next rising repository</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav><div class="brand"><span class="radar">◉</span> RepoRadar <b>AI</b></div><a href="https://github.com" target="_blank">GitHub ↗</a></nav>
+    <div class="hero-copy">
+      <span class="eyebrow">OPEN-SOURCE INTELLIGENCE</span>
+      <h1>Find the next rising<br><span>GitHub repository</span> early.</h1>
+      <p>Track momentum, discover hidden gems, and identify contribution opportunities before everyone else arrives.</p>
+      <div class="stats"><div><strong id="repoCount">0</strong><span>repos tracked</span></div><div><strong id="updated">—</strong><span>last refresh</span></div><div><strong>$0</strong><span>infrastructure goal</span></div></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <input id="search" placeholder="Search repositories, languages, topics…" />
+      <select id="language"><option value="">All languages</option></select>
+      <select id="sort"><option value="rising_score">Rising score</option><option value="opportunity_score">Opportunity</option><option value="stars">Stars</option><option value="star_delta">Recent growth</option></select>
+    </section>
+    <section class="section-head"><div><span class="eyebrow">LIVE SIGNALS</span><h2>Rising repositories</h2></div><p>Scores update automatically from GitHub data.</p></section>
+    <section id="grid" class="grid"></section>
+    <section id="empty" class="empty" hidden>No repositories yet. Run the collector workflow once.</section>
+  </main>
+
+  <footer>RepoRadar AI · Open source · Built to stay free</footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>
